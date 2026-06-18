@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart | Gurpreet Fireworks</title>
+  <meta name="description" content="Review your cart, select pickup or delivery, and checkout securely.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Canvas Background -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap"></div>
+
+  <!-- ====== HEADER ====== -->
+  <header class="scrolled">
+    <div class="wrap">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Gurpreet Fireworks">
+        <div class="logo-text">
+          <span class="logo-brand">Gurpreet</span>
+          <span class="logo-sub">Fireworks</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="index.html#categories">Shop</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#stores">Stores</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-icons">
+        <span class="icon-btn" data-open="wishDrawer"><i class="far fa-heart"></i><span class="count wish-count">0</span></span>
+        <span class="icon-btn" data-open="cartDrawer"><i class="fas fa-shopping-bag"></i><span class="count cart-count">0</span></span>
+        <span class="menu-toggle"><i class="fas fa-bars"></i></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== CART SECTION ====== -->
+  <main class="section" style="padding-top: 140px; min-height: 80vh;">
+    <div class="wrap">
+      <h1 class="heading heading-lg" style="margin-bottom: 40px;">Your Shopping Cart</h1>
+
+      <div class="cart-layout-grid">
+        <!-- Left: Items list -->
+        <div class="cart-items-wrap">
+          <div class="cart-items-list" id="cart-page-list">
+            <!-- Dynamically populated by app.js -->
+          </div>
+          <div style="margin-top: 20px;">
+            <a href="index.html#products" class="btn btn-outline"><i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Continue Shopping</a>
+          </div>
+        </div>
+
+        <!-- Right: Order summary & pickup options -->
+        <div class="cart-summary-card">
+          <h2 class="heading heading-md" style="margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">Order Summary</h2>
+          
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">₹0</span>
+          </div>
+          <div class="summary-row">
+            <span>GST (18%)</span>
+            <span id="cart-gst">₹0</span>
+          </div>
+          <div class="summary-row" id="delivery-row" style="display: none; border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px;">
+            <span>Home Delivery Charge</span>
+            <span>₹150</span>
+          </div>
+          
+          <div class="summary-row total-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+            <strong>Grand Total</strong>
+            <strong id="cart-total" style="color: var(--gold); font-size: 1.4rem;">₹0</strong>
+          </div>
+
+          <!-- Fulfillment Choice -->
+          <div class="fulfillment-box">
+            <h3>Fulfillment Option</h3>
+            <div class="full-option">
+              <label class="radio-label">
+                <input type="radio" name="fulfillment" value="pickup" checked id="ff-pickup">
+                <span class="radio-custom"></span>
+                <span class="radio-text">Pick Up In Store <span class="badge badge-gold" style="font-size:0.55rem; padding: 2px 6px; margin-left:5px; border-radius: 2px;">FREE</span></span>
+              </label>
+            </div>
+            <div class="full-option">
+              <label class="radio-label">
+                <input type="radio" name="fulfillment" value="delivery" id="ff-delivery">
+                <span class="radio-custom"></span>
+                <span class="radio-text">Home Delivery (Flat ₹150)</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Store Selection (Displays if pickup is active) -->
+          <div class="store-select-box" id="store-picker-area">
+            <h3>Select Pick-up Store</h3>
+            <select class="store-select" id="pickup-store-select">
+              <option value="delhi">Delhi NCR Outlet (Chandni Chowk)</option>
+              <option value="mumbai">Mumbai Outlet (Bhuleshwar)</option>
+              <option value="jaipur">Jaipur Outlet (Johari Bazaar)</option>
+              <option value="chennai">Chennai Outlet (T. Nagar)</option>
+            </select>
+            <div class="selected-store-info" id="selected-store-details">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+
+          <div class="promo-box">
+            <input type="text" placeholder="Promo Code" id="promo-code-input">
+            <button id="apply-promo-btn">Apply</button>
+          </div>
+
+          <button class="btn btn-gold" id="proceed-checkout-btn" style="width: 100%; justify-content: center; margin-top: 30px;">Proceed to Checkout</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 20px;">
+            <img src="assets/logo.png" alt="Gurpreet Fireworks" style="height: 36px; width: 36px; border-radius: 50%;">
+            <div class="logo-text">
+              <span class="logo-brand" style="font-size: 1.1rem;">Gurpreet</span>
+              <span class="logo-sub">Fireworks</span>
+            </div>
+          </div>
+          <p>India's premium fireworks brand since 1999. Retail, wholesale, and professional display services across 50+ cities.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#categories">Shop by Category</a></li>
+            <li><a href="index.html#products">All Products</a></li>
+            <li><a href="index.html#services">Why Choose Us</a></li>
+            <li><a href="index.html#stores">Store Locations</a></li>
+            <li><a href="index.html#safety">Safety & FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="index.html#contact">Wedding Displays</a></li>
+            <li><a href="index.html#contact">Corporate Events</a></li>
+            <li><a href="index.html#contact">Festival Packages</a></li>
+            <li><a href="index.html#contact">B2B / Wholesale</a></li>
+            <li><a href="index.html#contact">Custom Orders</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p style="margin-bottom: 15px;">Subscribe for Diwali specials, new launches, and exclusive offers.</p>
+          <div class="nl-form">
+            <input type="email" placeholder="Your email">
+            <button>→</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Gurpreet Fireworks. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+          <a href="#">Shipping</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919810000000" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ====== DRAWERS ====== -->
+  <!-- Cart Drawer -->
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-head">
+      <h2>Shopping Cart</h2>
+      <span class="drawer-close"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="drawer-body">
+      <div class="empty-drawer"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>
+    </div>
+    <div class="drawer-foot">
+      <div class="drawer-total">
+        <span>Total</span>
+        <span>₹0</span>
+      </div>
+      <a href="cart.html" class="btn btn-gold" style="width: 100%; justify-content: center;">View Cart</a>
+    </div>
+  </aside>
+
+  <!-- Wishlist Drawer -->
+  <aside class="drawer" id="wishDrawer">
+    <div class="drawer-head">
+      <h2>Wishlist</h2>
+      <span class="drawer-close"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="drawer-body">
+      <div class="empty-drawer"><i class="fas fa-heart"></i><p>Your wishlist is empty</p></div>
+    </div>
+  </aside>
+
+  <script src="js/store-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Gurpreet Fireworks</title>
+  <meta name="description" content="Explore premium fireworks in detail. PESO certified, eco-friendly, and safety compliant.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Canvas Background -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap"></div>
+
+  <!-- ====== HEADER ====== -->
+  <header class="scrolled">
+    <div class="wrap">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Gurpreet Fireworks">
+        <div class="logo-text">
+          <span class="logo-brand">Gurpreet</span>
+          <span class="logo-sub">Fireworks</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="index.html#categories">Shop</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#stores">Stores</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-icons">
+        <span class="icon-btn" data-open="wishDrawer"><i class="far fa-heart"></i><span class="count wish-count">0</span></span>
+        <span class="icon-btn" data-open="cartDrawer"><i class="fas fa-shopping-bag"></i><span class="count cart-count">0</span></span>
+        <span class="menu-toggle"><i class="fas fa-bars"></i></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== PRODUCT SECTION ====== -->
+  <main class="section" style="padding-top: 140px; min-height: 80vh;">
+    <div class="wrap">
+      
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumbs">
+        <a href="index.html">Home</a> &nbsp;/&nbsp; 
+        <a href="index.html#products" id="bc-cat">Shop</a> &nbsp;/&nbsp; 
+        <span id="bc-name" style="color: var(--white);">Loading...</span>
+      </nav>
+
+      <!-- Details Grid -->
+      <div class="p-details-grid">
+        <div class="p-details-gallery">
+          <div class="p-gallery-img">
+            <span class="badge" id="pd-badge" style="position: absolute; top: 20px; left: 20px; display: none;"></span>
+            <img src="" id="pd-image" alt="Loading Product...">
+          </div>
+        </div>
+        <div class="p-details-info">
+          <span class="p-card-cat" id="pd-cat">Loading...</span>
+          <h1 class="heading heading-lg" id="pd-title" style="margin: 10px 0 15px;">Loading Product...</h1>
+          
+          <div class="p-card-stars" style="font-size: 0.9rem; margin-bottom: 25px;">
+            <span id="pd-stars"></span>
+            <span class="rev" id="pd-reviews" style="font-size: 0.8rem; margin-left: 8px;">(0)</span>
+          </div>
+
+          <div class="pd-price-row">
+            <span class="pd-price" id="pd-price">₹0</span>
+            <del class="pd-price-del" id="pd-price-del" style="display: none;">₹0</del>
+          </div>
+
+          <p class="pd-desc" id="pd-desc">Please wait while the product details are loading...</p>
+
+          <div class="pd-actions">
+            <div class="qty-select">
+              <button id="qty-minus">−</button>
+              <span id="qty-val">1</span>
+              <button id="qty-plus">+</button>
+            </div>
+            <button class="btn btn-gold" id="pd-add-to-cart" style="flex-grow: 1.5; justify-content: center;">Add to Cart</button>
+            <button class="btn btn-outline" id="pd-buy-now" style="flex-grow: 1; justify-content: center;">Buy Now</button>
+          </div>
+
+          <div class="pd-trust-badges">
+            <div class="pd-badge-item"><i class="fas fa-shield-alt"></i><span>PESO Certified</span></div>
+            <div class="pd-badge-item"><i class="fas fa-truck"></i><span>Pickup In Store</span></div>
+            <div class="pd-badge-item"><i class="fas fa-certificate"></i><span>Safety Verified</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs (Description, Specs, Safety) -->
+      <div class="pd-tabs" style="margin-top: 80px;">
+        <div class="pd-tab-headers">
+          <button class="tab-btn active" data-tab="tab-description">Description</button>
+          <button class="tab-btn" data-tab="tab-specs">Specifications</button>
+          <button class="tab-btn" data-tab="tab-safety">Safety Guidelines</button>
+        </div>
+        <div class="pd-tab-contents">
+          <!-- Description tab -->
+          <div class="tab-pane active" id="tab-description">
+            <p id="pd-details-text" style="font-size: 1.05rem; line-height: 1.8; color: var(--gray-light);">Loading detailed description...</p>
+          </div>
+          <!-- Specs tab -->
+          <div class="tab-pane" id="tab-specs">
+            <table class="specs-table" id="pd-specs-table">
+              <!-- Dynamically populated -->
+            </table>
+          </div>
+          <!-- Safety tab -->
+          <div class="tab-pane" id="tab-safety">
+            <ul class="safety-list" id="pd-safety-list">
+              <!-- Dynamically populated -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Products -->
+      <div class="pd-related" style="margin-top: 100px;">
+        <h2 class="heading heading-md" style="margin-bottom: 40px;">You May Also Like</h2>
+        <div class="product-grid" id="pd-related-grid">
+          <!-- Dynamically populated with 3 items -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 20px;">
+            <img src="assets/logo.png" alt="Gurpreet Fireworks" style="height: 36px; width: 36px; border-radius: 50%;">
+            <div class="logo-text">
+              <span class="logo-brand" style="font-size: 1.1rem;">Gurpreet</span>
+              <span class="logo-sub">Fireworks</span>
+            </div>
+          </div>
+          <p>India's premium fireworks brand since 1999. Retail, wholesale, and professional display services across 50+ cities.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#categories">Shop by Category</a></li>
+            <li><a href="index.html#products">All Products</a></li>
+            <li><a href="index.html#services">Why Choose Us</a></li>
+            <li><a href="index.html#stores">Store Locations</a></li>
+            <li><a href="index.html#safety">Safety & FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="index.html#contact">Wedding Displays</a></li>
+            <li><a href="index.html#contact">Corporate Events</a></li>
+            <li><a href="index.html#contact">Festival Packages</a></li>
+            <li><a href="index.html#contact">B2B / Wholesale</a></li>
+            <li><a href="index.html#contact">Custom Orders</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p style="margin-bottom: 15px;">Subscribe for Diwali specials, new launches, and exclusive offers.</p>
+          <div class="nl-form">
+            <input type="email" placeholder="Your email">
+            <button>→</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Gurpreet Fireworks. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+          <a href="#">Shipping</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919810000000" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ====== DRAWERS ====== -->
+  <!-- Cart Drawer -->
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-head">
+      <h2>Shopping Cart</h2>
+      <span class="drawer-close"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="drawer-body">
+      <div class="empty-drawer"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>
+    </div>
+    <div class="drawer-foot">
+      <div class="drawer-total">
+        <span>Total</span>
+        <span>₹0</span>
+      </div>
+      <a href="cart.html" class="btn btn-gold" style="width: 100%; justify-content: center;">View Cart</a>
+    </div>
+  </aside>
+
+  <!-- Wishlist Drawer -->
+  <aside class="drawer" id="wishDrawer">
+    <div class="drawer-head">
+      <h2>Wishlist</h2>
+      <span class="drawer-close"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="drawer-body">
+      <div class="empty-drawer"><i class="fas fa-heart"></i><p>Your wishlist is empty</p></div>
+    </div>
+  </aside>
+
+  <script src="js/store-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Gurpreet Fireworks</title>
+  <meta name="description" content="Securely place your order. Free store pickup or home delivery options.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- Canvas Background -->
+  <canvas id="fireworksCanvas"></canvas>
+
+  <!-- Toast Container -->
+  <div class="toast-wrap"></div>
+
+  <!-- ====== HEADER ====== -->
+  <header class="scrolled">
+    <div class="wrap">
+      <a href="index.html" class="logo">
+        <img src="assets/logo.png" alt="Gurpreet Fireworks">
+        <div class="logo-text">
+          <span class="logo-brand">Gurpreet</span>
+          <span class="logo-sub">Fireworks</span>
+        </div>
+      </a>
+
+      <nav>
+        <a href="index.html#categories">Shop</a>
+        <a href="index.html#products">Products</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#stores">Stores</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+
+      <div class="header-icons">
+        <span class="icon-btn" data-open="wishDrawer"><i class="far fa-heart"></i><span class="count wish-count">0</span></span>
+        <span class="icon-btn" data-open="cartDrawer"><i class="fas fa-shopping-bag"></i><span class="count cart-count">0</span></span>
+        <span class="menu-toggle"><i class="fas fa-bars"></i></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== CHECKOUT PAGE MAIN SECTION ====== -->
+  <main class="section" style="padding-top: 140px; min-height: 80vh;">
+    <div class="wrap">
+      
+      <!-- Checkout Main Container -->
+      <div id="checkout-main-view">
+        <h1 class="heading heading-lg" style="margin-bottom: 40px;">Checkout</h1>
+        
+        <form id="checkoutForm" class="checkout-layout-grid">
+          
+          <!-- Left: Forms wrapper -->
+          <div class="checkout-forms-wrap">
+            
+            <!-- Step 1: Contact info -->
+            <div class="checkout-section-box">
+              <h3>Contact Information</h3>
+              <div class="checkout-row">
+                <div class="field">
+                  <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Full Name</label>
+                  <input type="text" id="co-name" required placeholder="Enter your name">
+                </div>
+                <div class="field">
+                  <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Phone Number (For verification)</label>
+                  <input type="tel" id="co-phone" required placeholder="+91 XXXXX XXXXX">
+                </div>
+              </div>
+              <div class="field">
+                <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Email Address</label>
+                <input type="email" id="co-email" required placeholder="your@email.com">
+              </div>
+            </div>
+
+            <!-- Step 2: Pickup/Delivery Details -->
+            <div class="checkout-section-box">
+              <h3>Fulfillment & Delivery Details</h3>
+              <div id="checkout-pickup-info" style="display: none;">
+                <h4 style="font-size: 0.95rem; font-weight: 500; color: var(--gold); margin-bottom: 8px;"><i class="fas fa-store" style="margin-right: 8px;"></i> Selected Store Location</h4>
+                <div class="selected-store-info" id="checkout-store-details" style="background: rgba(0,0,0,0.15); margin-top: 5px;">
+                  <!-- Dynamically populated -->
+                </div>
+                <p style="font-size: 0.75rem; color: var(--gray); margin-top: 15px; line-height: 1.6;">
+                  <i class="fas fa-info-circle" style="color: var(--gold); margin-right:5px;"></i> 
+                  Items will be reserved for 48 hours. Please present the QR code or order confirmation SMS/Email when picking up at the counter.
+                </p>
+              </div>
+
+              <div id="checkout-delivery-info" style="display: none;">
+                <h4 style="font-size: 0.95rem; font-weight: 500; color: var(--gold); margin-bottom: 15px;"><i class="fas fa-truck" style="margin-right: 8px;"></i> Home Delivery Address</h4>
+                <div class="field">
+                  <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Street Address</label>
+                  <input type="text" id="co-address" placeholder="House/Flat No., Building, Area name">
+                </div>
+                <div class="checkout-row">
+                  <div class="field">
+                    <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">City (Served cities only)</label>
+                    <select id="co-city" class="store-select" style="height: 48px;">
+                      <option value="delhi">Delhi NCR</option>
+                      <option value="mumbai">Mumbai</option>
+                      <option value="jaipur">Jaipur</option>
+                      <option value="chennai">Chennai</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Pincode</label>
+                    <input type="text" id="co-pincode" placeholder="XXXXXX">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Payment Options -->
+            <div class="checkout-section-box">
+              <h3>Select Payment Method</h3>
+              <div class="checkout-payment-options">
+                
+                <!-- Pay Online Option -->
+                <div class="payment-option-card active" id="pay-card-online">
+                  <label class="radio-label">
+                    <input type="radio" name="paymentMethod" value="online" checked id="pay-opt-online">
+                    <span class="radio-custom"></span>
+                    <span class="radio-text">Pay Online (Card / UPI / Netbanking)</span>
+                  </label>
+                  
+                  <div class="payment-details-form" id="online-fields">
+                    <div style="margin-bottom: 15px;">
+                      <label style="display:block; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Card Number</label>
+                      <input type="text" placeholder="1234 5678 9012 3456" id="co-card-num">
+                    </div>
+                    <div class="checkout-row">
+                      <div>
+                        <label style="display:block; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Expiry Date</label>
+                        <input type="text" placeholder="MM/YY" id="co-card-exp">
+                      </div>
+                      <div>
+                        <label style="display:block; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">CVV</label>
+                        <input type="text" placeholder="XYZ" id="co-card-cvv">
+                      </div>
+                    </div>
+                    <div style="text-align: center; margin: 15px 0; font-size: 0.75rem; color: var(--gray);">— OR —</div>
+                    <div>
+                      <label style="display:block; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">UPI ID (GPay / PhonePe / Paytm)</label>
+                      <input type="text" placeholder="username@upi" id="co-upi-id">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Pay at Store Option -->
+                <div class="payment-option-card" id="pay-card-store">
+                  <label class="radio-label">
+                    <input type="radio" name="paymentMethod" value="store" id="pay-opt-store">
+                    <span class="radio-custom"></span>
+                    <span class="radio-text" id="pay-opt-store-label">Pay on Pickup at Store</span>
+                  </label>
+                  
+                  <div class="payment-details-form" style="font-size: 0.8rem; color: var(--gray); line-height: 1.6;">
+                    <i class="fas fa-store-alt" style="color: var(--gold); margin-right: 5px;"></i>
+                    Reserve online, pick up, and make payment directly at the store counter. We accept Cash, UPI, and all Credit/Debit cards at our billing desks.
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right: Order Summary box -->
+          <div class="checkout-summary-box">
+            <h2 class="heading heading-md" style="margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">Order Summary</h2>
+            
+            <!-- Items list mini -->
+            <div class="summary-items-list" id="checkout-mini-list">
+              <!-- Dynamically populated -->
+            </div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="checkout-subtotal">₹0</span>
+            </div>
+            <div class="summary-row">
+              <span>GST (18%)</span>
+              <span id="checkout-gst">₹0</span>
+            </div>
+            <div class="summary-row" id="checkout-delivery-row" style="display: none; border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px;">
+              <span>Home Delivery</span>
+              <span>₹150</span>
+            </div>
+            <div class="summary-row total-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
+              <strong>Grand Total</strong>
+              <strong id="checkout-total" style="color: var(--gold); font-size: 1.4rem;">₹0</strong>
+            </div>
+
+            <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center; height: 50px; margin-top: 25px;">Place Order</button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Success Screen (Hidden by default, shown via app.js on order completion) -->
+      <div class="checkout-success-container" id="checkout-success-view" style="display: none; text-align: center; max-width: 650px; margin: 40px auto; padding: 50px; border: 1px solid rgba(201,168,76,0.25); background: var(--bg-alt);">
+        <div class="success-icon" style="color: var(--gold); font-size: 4rem; margin-bottom: 25px;"><i class="fas fa-check-circle"></i></div>
+        <h2 class="heading heading-md" style="margin-bottom: 10px;">Order Placed Successfully!</h2>
+        <p style="color: var(--gray-light); margin-bottom: 30px; line-height: 1.6; font-size: 0.95rem;">Thank you for shopping with Gurpreet Fireworks. Your order is confirmed and reserved.</p>
+        
+        <div class="success-details-box" style="background: rgba(0,0,0,0.15); border: 1px solid var(--border); padding: 25px; margin-bottom: 35px; text-align: left; font-size: 0.9rem;">
+          <div class="success-row" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span>Order ID:</span>
+            <strong id="success-order-id" style="color: var(--white);">#NF-2026-8942</strong>
+          </div>
+          <div class="success-row" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span>Pickup Code:</span>
+            <strong id="success-pickup-code" style="color: var(--gold); font-family: monospace; font-size: 1.1rem;">NF-PK-9817</strong>
+          </div>
+          <div class="success-row" style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span>Fulfillment Type:</span>
+            <span id="success-fulfillment-type" style="color: var(--white); font-weight: 500;">Store Pickup</span>
+          </div>
+          <div id="success-location-details" style="margin-top: 15px; border-top: 1px solid var(--border); padding-top: 15px; color: var(--gray);">
+            <!-- Dynamic location address -->
+          </div>
+        </div>
+
+        <div class="success-qr" style="margin-bottom: 35px;">
+          <div class="qr-mock" style="width: 140px; height: 140px; border: 4px solid var(--gold); background: white; margin: 0 auto; display: flex; align-items: center; justify-content: center; position: relative; padding: 10px; border-radius: 4px;">
+            <i class="fas fa-qrcode" style="font-size: 7.5rem; color: #111;"></i>
+          </div>
+          <p style="font-size: 0.75rem; color: var(--gray); margin-top: 10px;">Show this QR / Code at the billing desk to collect your order</p>
+        </div>
+
+        <div style="display: flex; gap: 15px; justify-content: center;">
+          <a href="index.html" class="btn btn-gold">Back to Homepage</a>
+          <button class="btn btn-outline" onclick="window.print()"><i class="fas fa-print"></i> Print Details</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 20px;">
+            <img src="assets/logo.png" alt="Gurpreet Fireworks" style="height: 36px; width: 36px; border-radius: 50%;">
+            <div class="logo-text">
+              <span class="logo-brand" style="font-size: 1.1rem;">Gurpreet</span>
+              <span class="logo-sub">Fireworks</span>
+            </div>
+          </div>
+          <p>India's premium fireworks brand since 1999. Retail, wholesale, and professional display services across 50+ cities.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html#categories">Shop by Category</a></li>
+            <li><a href="index.html#products">All Products</a></li>
+            <li><a href="index.html#services">Why Choose Us</a></li>
+            <li><a href="index.html#stores">Store Locations</a></li>
+            <li><a href="index.html#safety">Safety & FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="index.html#contact">Wedding Displays</a></li>
+            <li><a href="index.html#contact">Corporate Events</a></li>
+            <li><a href="index.html#contact">Festival Packages</a></li>
+            <li><a href="index.html#contact">B2B / Wholesale</a></li>
+            <li><a href="index.html#contact">Custom Orders</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p style="margin-bottom: 15px;">Subscribe for Diwali specials, new launches, and exclusive offers.</p>
+          <div class="nl-form">
+            <input type="email" placeholder="Your email">
+            <button>→</button>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 Gurpreet Fireworks. All rights reserved.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms</a>
+          <a href="#">Shipping</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919810000000" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- ====== DRAWERS ====== -->
+  <!-- Cart Drawer -->
+  <aside class="drawer" id="cartDrawer">
+    <div class="drawer-head">
+      <h2>Shopping Cart</h2>
+      <span class="drawer-close"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="drawer-body">
+      <div class="empty-drawer"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>
+    </div>
+    <div class="drawer-foot">
+      <div class="drawer-total">
+        <span>Total</span>
+        <span>₹0</span>
+      </div>
+      <a href="cart.html" class="btn btn-gold" style="width: 100%; justify-content: center;">View Cart</a>
+    </div>
+  </aside>
+
+  <!-- Wishlist Drawer -->
+  <aside class="drawer" id="wishDrawer">
+    <div class="drawer-head">
+      <h2>Wishlist</h2>
+      <span class="drawer-close"><i class="fas fa-times"></i></span>
+    </div>
+    <div class="drawer-body">
+      <div class="empty-drawer"><i class="fas fa-heart"></i><p>Your wishlist is empty</p></div>
+    </div>
+  </aside>
+
+  <script src="js/store-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
