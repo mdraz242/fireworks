@@ -66,7 +66,7 @@
                 </div>
                 <div class="field">
                   <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Phone Number (For verification)</label>
-                  <input type="tel" id="co-phone" required placeholder="+91 XXXXX XXXXX">
+                  <input type="tel" id="co-phone" required placeholder="+44 7700 900077">
                 </div>
               </div>
               <div class="field">
@@ -99,15 +99,15 @@
                   <div class="field">
                     <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">City (Served cities only)</label>
                     <select id="co-city" class="store-select" style="height: 48px;">
-                      <option value="delhi">Delhi NCR</option>
-                      <option value="mumbai">Mumbai</option>
-                      <option value="jaipur">Jaipur</option>
-                      <option value="chennai">Chennai</option>
+                      <option value="london">London</option>
+                      <option value="manchester">Manchester</option>
+                      <option value="edinburgh">Edinburgh</option>
+                      <option value="birmingham">Birmingham</option>
                     </select>
                   </div>
                   <div class="field">
-                    <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Pincode</label>
-                    <input type="text" id="co-pincode" placeholder="XXXXXX">
+                    <label style="display:block; font-size:0.65rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; color:var(--gray-light);">Postcode</label>
+                    <input type="text" id="co-postcode" placeholder="E.g. SW1A 1AA">
                   </div>
                 </div>
               </div>
@@ -123,7 +123,7 @@
                   <label class="radio-label">
                     <input type="radio" name="paymentMethod" value="online" checked id="pay-opt-online">
                     <span class="radio-custom"></span>
-                    <span class="radio-text">Pay Online (Card / UPI / Netbanking)</span>
+                    <span class="radio-text">Pay Online (Credit or Debit Card / PayPal)</span>
                   </label>
                   
                   <div class="payment-details-form" id="online-fields">
@@ -143,8 +143,8 @@
                     </div>
                     <div style="text-align: center; margin: 15px 0; font-size: 0.75rem; color: var(--gray);">— OR —</div>
                     <div>
-                      <label style="display:block; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">UPI ID (GPay / PhonePe / Paytm)</label>
-                      <input type="text" placeholder="username@upi" id="co-upi-id">
+                      <label style="display:block; font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">PayPal Email Address</label>
+                      <input type="email" placeholder="yourname@paypal.com" id="co-paypal-email">
                     </div>
                   </div>
                 </div>
@@ -159,7 +159,7 @@
                   
                   <div class="payment-details-form" style="font-size: 0.8rem; color: var(--gray); line-height: 1.6;">
                     <i class="fas fa-store-alt" style="color: var(--gold); margin-right: 5px;"></i>
-                    Reserve online, pick up, and make payment directly at the store counter. We accept Cash, UPI, and all Credit/Debit cards at our billing desks.
+                    Reserve online, pick up, and make payment directly at the store counter. We accept Cash, PayPal, and all major Credit/Debit cards at our billing desks.
                   </div>
                 </div>
 
@@ -179,19 +179,19 @@
 
             <div class="summary-row">
               <span>Subtotal</span>
-              <span id="checkout-subtotal">₹0</span>
+              <span id="checkout-subtotal">£0.00</span>
             </div>
             <div class="summary-row">
-              <span>GST (18%)</span>
-              <span id="checkout-gst">₹0</span>
+              <span>VAT (20%)</span>
+              <span id="checkout-vat">£0.00</span>
             </div>
             <div class="summary-row" id="checkout-delivery-row" style="display: none; border-top: 1px dashed var(--border); padding-top: 10px; margin-top: 10px;">
               <span>Home Delivery</span>
-              <span>₹150</span>
+              <span>£5.00</span>
             </div>
             <div class="summary-row total-row" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);">
               <strong>Grand Total</strong>
-              <strong id="checkout-total" style="color: var(--gold); font-size: 1.4rem;">₹0</strong>
+              <strong id="checkout-total" style="color: var(--gold); font-size: 1.4rem;">£0.00</strong>
             </div>
 
             <button type="submit" class="btn btn-gold" style="width: 100%; justify-content: center; height: 50px; margin-top: 25px;">Place Order</button>
@@ -252,7 +252,7 @@
               <span class="logo-sub">Fireworks</span>
             </div>
           </div>
-          <p>India's premium fireworks brand since 1999. Retail, wholesale, and professional display services across 50+ cities.</p>
+          <p>The UK's premium fireworks brand since 1999. Retail, wholesale, and professional display services nationwide.</p>
         </div>
         <div class="footer-col">
           <h4>Quick Links</h4>
@@ -276,7 +276,7 @@
         </div>
         <div class="footer-col">
           <h4>Stay Updated</h4>
-          <p style="margin-bottom: 15px;">Subscribe for Diwali specials, new launches, and exclusive offers.</p>
+          <p style="margin-bottom: 15px;">Subscribe for Bonfire Night specials, new launches, and exclusive offers.</p>
           <div class="nl-form">
             <input type="email" placeholder="Your email">
             <button>→</button>
@@ -295,7 +295,7 @@
   </footer>
 
   <!-- WhatsApp Float -->
-  <a href="https://wa.me/919810000000" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <a href="https://wa.me/442079460958" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <i class="fab fa-whatsapp"></i>
   </a>
 
@@ -312,7 +312,7 @@
     <div class="drawer-foot">
       <div class="drawer-total">
         <span>Total</span>
-        <span>₹0</span>
+        <span>£0.00</span>
       </div>
       <a href="cart.html" class="btn btn-gold" style="width: 100%; justify-content: center;">View Cart</a>
     </div>

@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!cartBody) return;
     if (cart.length === 0) {
       cartBody.innerHTML = '<div class="empty-drawer"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p></div>';
-      if (cartTotal) cartTotal.textContent = '₹0';
+      if (cartTotal) cartTotal.textContent = '£0.00';
       return;
     }
 
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="d-item-thumb"><img src="${item.img || ''}" alt="${item.name}"></div>
         <div class="d-item-info">
           <h4>${item.name}</h4>
-          <span>₹${item.price.toLocaleString()}</span>
+          <span>£${item.price.toFixed(2)}</span>
           <div class="d-item-qty">
             <button onclick="window._cartQty(${i},-1)">−</button>
             <span>${item.qty}</span>
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('');
 
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
-    if (cartTotal) cartTotal.textContent = '₹' + total.toLocaleString();
+    if (cartTotal) cartTotal.textContent = '£' + total.toFixed(2);
   }
 
   window._cartQty = (idx, delta) => {
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="d-item-thumb"><img src="${item.img || ''}" alt="${item.name}"></div>
         <div class="d-item-info">
           <h4>${item.name}</h4>
-          <span>₹${item.price.toLocaleString()}</span>
+          <span>£${item.price.toFixed(2)}</span>
         </div>
         <span class="d-item-remove" onclick="window._wishRemove(${i})"><i class="fas fa-trash-alt"></i></span>
       </div>
@@ -293,14 +293,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ------ Diwali Countdown ------- */
-  function diwaliCountdown() {
+  /* ------ Bonfire Countdown ------- */
+  function bonfireCountdown() {
     const now = new Date();
-    let diwali = new Date(now.getFullYear(), 9, 20); // approx Oct 20
-    if (diwali < now) diwali.setFullYear(diwali.getFullYear() + 1);
+    let bonfire = new Date(now.getFullYear(), 10, 5); // approx Nov 5
+    if (bonfire < now) bonfire.setFullYear(bonfire.getFullYear() + 1);
 
     function tick() {
-      const diff = diwali - new Date();
+      const diff = bonfire - new Date();
       if (diff < 0) return;
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tick();
     setInterval(tick, 1000);
   }
-  diwaliCountdown();
+  bonfireCountdown();
 
   /* ------ Modals ------- */
   document.querySelectorAll('[data-modal]').forEach(btn => {
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!qv) return;
     qv.querySelector('.qv-image img').src = img || '';
     qv.querySelector('.qv-name').textContent = name;
-    qv.querySelector('.qv-price').textContent = '₹' + Number(price).toLocaleString();
+    qv.querySelector('.qv-price').textContent = '£' + Number(price).toFixed(2);
     qv.querySelector('.qv-cat').textContent = cat || '';
     qv.querySelector('.qv-desc').textContent = desc || 'Premium quality firework from Gurpreet Fireworks. Ideal for celebrations and events.';
     qv.querySelector('.qv-add').setAttribute('onclick', `addToCart('${name.replace(/'/g,"\\'")}',${price},'${img}')`);
@@ -426,28 +426,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ------ STORES CONSTANT & MULTI-PAGE INITIALIZATION ROUTING ------ */
   const STORES = {
-    delhi: {
-      name: "Delhi NCR Outlet",
-      address: "123 Fireworks Lane, Chandni Chowk, Old Delhi 110006, India",
-      phone: "+91 98100 87311",
+    london: {
+      name: "London Outlet",
+      address: "123 Fireworks Lane, Covent Garden, London WC2E 8RF, United Kingdom",
+      phone: "+44 20 7946 0958",
       timings: "10:00 AM – 9:00 PM"
     },
-    mumbai: {
-      name: "Mumbai Outlet",
-      address: "45 Bhuleshwar Bazar Rd, Marine Lines, Mumbai 400002, India",
-      phone: "+91 98200 45229",
+    manchester: {
+      name: "Manchester Outlet",
+      address: "45 Sparkler Way, Northern Quarter, Manchester M1 1DB, United Kingdom",
+      phone: "+44 161 496 0294",
       timings: "10:00 AM – 9:00 PM"
     },
-    jaipur: {
-      name: "Jaipur Outlet",
-      address: "78 Johari Bazaar Rd, Pink City, Jaipur 302003, India",
-      phone: "+91 98290 12891",
+    edinburgh: {
+      name: "Edinburgh Outlet",
+      address: "78 Royal Mile, Old Town, Edinburgh EH1 1TB, United Kingdom",
+      phone: "+44 131 496 0891",
       timings: "10:00 AM – 8:30 PM"
     },
-    chennai: {
-      name: "Chennai Outlet",
-      address: "89 Thyagaraya Rd, T. Nagar, Chennai 600017, India",
-      phone: "+91 98400 98124",
+    birmingham: {
+      name: "Birmingham Outlet",
+      address: "89 Jewellery Quarter, Birmingham B18 6HN, United Kingdom",
+      phone: "+44 121 496 0124",
       timings: "10:00 AM – 9:00 PM"
     }
   };
@@ -509,11 +509,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Price
     const pdPrice = document.getElementById('pd-price');
-    if (pdPrice) pdPrice.textContent = '₹' + product.price.toLocaleString('en-IN');
+    if (pdPrice) pdPrice.textContent = '£' + product.price.toFixed(2);
     const pdPriceDel = document.getElementById('pd-price-del');
     if (pdPriceDel) {
       if (product.originalPrice && product.originalPrice > product.price) {
-        pdPriceDel.textContent = '₹' + product.originalPrice.toLocaleString('en-IN');
+        pdPriceDel.textContent = '£' + product.originalPrice.toFixed(2);
         pdPriceDel.style.display = 'inline-block';
       } else {
         pdPriceDel.style.display = 'none';
@@ -627,8 +627,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <span class="rev">(${p.reviewsCount})</span>
             </div>
             <div class="p-card-price">
-              <strong>₹${p.price.toLocaleString('en-IN')}</strong>
-              ${p.originalPrice > p.price ? `<del>₹${p.originalPrice.toLocaleString('en-IN')}</del>` : ''}
+              <strong>£${p.price.toFixed(2)}</strong>
+              ${p.originalPrice > p.price ? `<del>£${p.originalPrice.toFixed(2)}</del>` : ''}
             </div>
           </div>
         </div>
@@ -671,14 +671,14 @@ document.addEventListener('DOMContentLoaded', () => {
           <img src="${item.img || 'assets/logo.png'}" alt="${item.name}">
           <div class="cart-item-info">
             <h4>${item.name}</h4>
-            <span>₹${item.price.toLocaleString('en-IN')}</span>
+            <span>£${item.price.toFixed(2)}</span>
           </div>
           <div class="cart-item-qty">
             <button onclick="window._cartPageQty(${i},-1)">−</button>
             <span>${item.qty}</span>
             <button onclick="window._cartPageQty(${i},1)">+</button>
           </div>
-          <div class="cart-item-subtotal">₹${(item.price * item.qty).toLocaleString('en-IN')}</div>
+          <div class="cart-item-subtotal">£${(item.price * item.qty).toFixed(2)}</div>
           <span class="cart-item-remove-btn" onclick="window._cartPageRemove(${i})"><i class="fas fa-trash-alt"></i></span>
         </div>
       `).join('');
@@ -702,36 +702,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTotals() {
       const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
-      const gst = Math.round(subtotal * 0.18);
+      const vat = Number((subtotal * 0.20).toFixed(2));
       
       const isDelivery = ffDelivery && ffDelivery.checked;
-      const deliveryFee = isDelivery ? 150 : 0;
+      const deliveryFee = isDelivery ? 5.00 : 0;
       
       const delRow = document.getElementById('delivery-row');
       if (delRow) delRow.style.display = isDelivery ? 'flex' : 'none';
 
       let discount = 0;
       if (discountPercent > 0) {
-        discount = Math.round((subtotal + gst) * (discountPercent / 100));
+        discount = Number(((subtotal + vat) * (discountPercent / 100)).toFixed(2));
       }
 
-      const total = subtotal + gst + deliveryFee - discount;
+      const total = Number((subtotal + vat + deliveryFee - discount).toFixed(2));
       
       const subEl = document.getElementById('cart-subtotal');
-      if (subEl) subEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
-      const gstEl = document.getElementById('cart-gst');
-      if (gstEl) gstEl.textContent = '₹' + gst.toLocaleString('en-IN');
+      if (subEl) subEl.textContent = '£' + subtotal.toFixed(2);
+      const vatEl = document.getElementById('cart-vat');
+      if (vatEl) vatEl.textContent = '£' + vat.toFixed(2);
       const totEl = document.getElementById('cart-total');
-      if (totEl) totEl.textContent = '₹' + total.toLocaleString('en-IN');
+      if (totEl) totEl.textContent = '£' + total.toFixed(2);
 
       localStorage.setItem('nf_checkout_summary', JSON.stringify({
         subtotal,
-        gst,
+        vat,
         deliveryFee,
         discount,
         total,
         fulfillment: isDelivery ? 'delivery' : 'pickup',
-        store: storeSelect ? storeSelect.value : 'delhi'
+        store: storeSelect ? storeSelect.value : 'london'
       }));
     }
 
@@ -773,13 +773,13 @@ document.addEventListener('DOMContentLoaded', () => {
       applyPromo.addEventListener('click', () => {
         const promoInp = document.getElementById('promo-code-input');
         const code = promoInp ? promoInp.value.toUpperCase().trim() : '';
-        if (code === 'DIWALI40') {
-          discountPercent = 10;
-          showToast('Promo code DIWALI40 applied! 10% discount.');
+        if (code === 'BONFIRE40') {
+          discountPercent = 40;
+          showToast('Promo code BONFIRE40 applied! 40% discount.');
           updateTotals();
-        } else if (code === 'FESTIVE20') {
+        } else if (code === 'FESTIVE5') {
           discountPercent = 5;
-          showToast('Promo code FESTIVE20 applied! 5% discount.');
+          showToast('Promo code FESTIVE5 applied! 5% discount.');
           updateTotals();
         } else if (code) {
           showToast('Invalid promo code');
@@ -816,23 +816,23 @@ document.addEventListener('DOMContentLoaded', () => {
               <span>Qty: ${item.qty}</span>
             </div>
           </div>
-          <span class="summary-item-mini-price">₹${(item.price * item.qty).toLocaleString('en-IN')}</span>
+          <span class="summary-item-mini-price">£${(item.price * item.qty).toFixed(2)}</span>
         </div>
       `).join('');
     }
 
     const subtotal = summary.subtotal || cart.reduce((s, i) => s + i.price * i.qty, 0);
-    const gst = summary.gst || Math.round(subtotal * 0.18);
+    const vat = summary.vat !== undefined ? summary.vat : Number((subtotal * 0.20).toFixed(2));
     const deliveryFee = summary.deliveryFee || 0;
     const discount = summary.discount || 0;
-    const total = subtotal + gst + deliveryFee - discount;
+    const total = Number((subtotal + vat + deliveryFee - discount).toFixed(2));
 
     const subEl = document.getElementById('checkout-subtotal');
-    if (subEl) subEl.textContent = '₹' + subtotal.toLocaleString('en-IN');
-    const gstEl = document.getElementById('checkout-gst');
-    if (gstEl) gstEl.textContent = '₹' + gst.toLocaleString('en-IN');
+    if (subEl) subEl.textContent = '£' + subtotal.toFixed(2);
+    const vatEl = document.getElementById('checkout-vat');
+    if (vatEl) vatEl.textContent = '£' + vat.toFixed(2);
     const totEl = document.getElementById('checkout-total');
-    if (totEl) totEl.textContent = '₹' + total.toLocaleString('en-IN');
+    if (totEl) totEl.textContent = '£' + total.toFixed(2);
 
     const coDelRow = document.getElementById('checkout-delivery-row');
     const coDelInfo = document.getElementById('checkout-delivery-info');
@@ -853,7 +853,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (coDelInfo) coDelInfo.style.display = 'none';
       if (coPickInfo) coPickInfo.style.display = 'block';
 
-      const storeCode = summary.store || 'delhi';
+      const storeCode = summary.store || 'london';
       const store = STORES[storeCode];
       const detailsEl = document.getElementById('checkout-store-details');
       if (detailsEl && store) {
@@ -899,9 +899,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const payMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
         if (payMethod === 'online') {
           const card = document.getElementById('co-card-num').value.trim();
-          const upi = document.getElementById('co-upi-id').value.trim();
-          if (!card && !upi) {
-            showToast('Please enter Credit Card details or UPI ID');
+          const paypal = document.getElementById('co-paypal-email').value.trim();
+          if (!card && !paypal) {
+            showToast('Please enter Credit Card details or PayPal email');
             return;
           }
         }
@@ -918,12 +918,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('success-fulfillment-type').textContent = 'Home Delivery';
             successLoc.innerHTML = `
               <p style="margin-bottom:8px;"><strong style="color:var(--white);"><i class="fas fa-truck" style="color:var(--gold);"></i> Delivering to Address:</strong></p>
-              <p style="color:var(--white);">${document.getElementById('co-address').value}, ${document.getElementById('co-city').value.toUpperCase()} - ${document.getElementById('co-pincode').value}</p>
+              <p style="color:var(--white);">${document.getElementById('co-address').value}, ${document.getElementById('co-city').value.toUpperCase()} - ${document.getElementById('co-postcode').value}</p>
               <p style="margin-top: 15px; font-size:0.8rem; color:var(--gray);">Estimated shipping time: 1-2 business days with SMS tracking.</p>
             `;
           } else {
             document.getElementById('success-fulfillment-type').textContent = 'Store Pickup';
-            const storeCode = summary.store || 'delhi';
+            const storeCode = summary.store || 'london';
             const store = STORES[storeCode];
             successLoc.innerHTML = `
               <p style="margin-bottom:8px;"><strong style="color:var(--white);"><i class="fas fa-store" style="color:var(--gold);"></i> Pick up Store Location:</strong></p>
